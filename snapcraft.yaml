@@ -7,14 +7,8 @@ description: |
     --> Create new launchers or modify existing ones with complete control and access to hidden settings
     --> Add and adjust desktop actions: shortcuts to advanced application features
     --> Easily rearrange the menu to suit your tastes
-grade: stable # must be 'stable' to release into candidate/stable channels
-confinement: classic # use 'strict' once you have the right plugs and slots
-
-layout:
-  /usr/share/lib/X11:
-    symlink: $SNAP/usr/share/lib/X11
-  /usr/lib/x86_64-linux-gnu/libgtk-3-0: 
-    bind: $SNAP/usr/lib/x86_64-linux-gnu/libgtk-3-0t64
+grade: stable
+confinement: classic
 
 apps:
   menulibre:
@@ -23,43 +17,8 @@ apps:
       GI_TYPELIB_PATH: $SNAP/usr/lib/x86_64-linux-gnu/girepository-1.0
       GTK_IM_MODULE_FILE: /usr/lib/x86_64-linux-gnu/libgtk-3-0/gtk-query-immodules-3.0
     command: bin/menulibre
-    command-chain: [bin/desktop-launch]
-    plugs:
-      - home
-      - dekstop
-      - x11
-      - wayland
-      - gsettings
-      
+    
 parts:
-  desktop-gtk3:
-    source: https://github.com/ubuntu/snapcraft-desktop-helpers.git
-    source-subdir: gtk
-    plugin: make
-    make-parameters: ["FLAVOR=gtk3"]
-    build-packages:
-      - build-essential
-      - libgtk-3-dev
-    stage-packages:
-      - libxkbcommon0  # XKB_CONFIG_ROOT
-      - fonts-ubuntu
-      - dmz-cursor-theme
-      - light-themes
-      - adwaita-icon-theme
-      - gnome-themes-extra
-      - shared-mime-info
-      - libgtk-3-0
-      - libgdk-pixbuf2.0-0
-      - libglib2.0-bin
-      - libgtk-3-bin
-      - unity-gtk3-module
-      - libappindicator3-1
-      - locales-all
-      - xdg-user-dirs
-      - ibus-gtk3
-      - libibus-1.0-5
-      - fcitx-frontend-gtk3
-      - xkb-data
   menulibre:
     plugin: python
     source: https://github.com/bluesabre/menulibre.git
@@ -77,15 +36,14 @@ parts:
       - gir1.2-gmenu-3.0
       - gir1.2-gtk-3.0
       - gir1.2-gtksource-3.0
-      - gobject-introspection
       - gnome-menus
       - python3
       - python3-gi
       - python3-psutil
       - xdg-utils
-
+    build-attributes:
+      - enable-patchelf
     override-build: |
-      set -eux
       python3 setup.py build
       mkdir -p $SNAPCRAFT_PART_INSTALL/bin
       cp -r /root/parts/menulibre/build/bin/* $SNAPCRAFT_PART_INSTALL/bin/
