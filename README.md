@@ -1,5 +1,5 @@
 # MenuLibre (snap version)
-Snap version of [menulibre](https://github.com/bluesabre/menulibre?tab=GPL-3.0-1-ov-file). Yes, this is quite useless.
+Snap version of [menulibre](https://github.com/bluesabre/menulibre?tab=GPL-3.0-1-ov-file). Yes, this is quite useless, but it's fun to make.
 
 **MenuLibre** is an advanced FreeDesktop.org compliant menu editor.
 
