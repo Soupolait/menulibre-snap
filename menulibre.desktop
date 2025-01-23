@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=MenuLibre
+Exec=menulibre
+Icon=${SNAP}/meta/gui/menulibre.svg
+Terminal= false
+Type=Application
