@@ -7,6 +7,7 @@ description: |
     --> Create new launchers or modify existing ones with complete control and access to hidden settings
     --> Add and adjust desktop actions: shortcuts to advanced application features
     --> Easily rearrange the menu to suit your tastes
+icon: snap/gui/menulibre.svg
 grade: stable
 confinement: classic
 
